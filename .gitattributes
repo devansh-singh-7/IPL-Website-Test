@@ -1,0 +1,19 @@
+* text=auto
+
+# Treat these as text and always normalize line endings
+*.js text
+*.ts text
+*.tsx text
+*.jsx text
+*.css text
+*.json text
+*.md text
+*.yml text
+*.yaml text
+
+# Keep binary files untouched
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.svg text eol=lf
