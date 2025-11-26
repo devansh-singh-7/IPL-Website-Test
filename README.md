@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## IPL Website
 
-## Getting Started
+A Next.js App Router project themed in dark red with Tailwind CSS v4 and a simple translation context. This repo contains the marketing/landing pages and components for the IPL Website.
 
-First, run the development server:
+### Tech Stack
+- Next.js (App Router, TypeScript)
+- Tailwind CSS v4 (utility-first, custom primary palette)
+- React Context for translations
 
-```bash
+### Requirements
+- Node.js 18+
+- npm 9+ (or pnpm/yarn/bun)
+
+### Local Setup
+```powershell
+# install dependencies
+npm install
+
+# run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# build for production
+npm run build
+
+# start production build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App runs at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Project Structure
+- `src/app/` — App Router pages (e.g., `about`, `our-team`, `news-events`, `friends-day`, `friendship-meet`, `humanitarian-services`)
+- `src/components/` — UI components (`Header`, `Footer`, etc.)
+- `src/contexts/` — `TranslationContext`
+- `src/i18n/` — translations (`js` and `ts`)
+- `public/Images/` — static assets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Theming
+Tailwind tokens map the primary color to red variants. Update `src/app/globals.css` if you want to adjust the palette.
 
-## Learn More
+### Scripts
+- `dev`: start dev server
+- `build`: production build
+- `start`: run built server
+- `lint`: run ESLint (if configured)
 
-To learn more about Next.js, take a look at the following resources:
+### Deployment
+You can deploy to any Node hosting or to Vercel. Build with `npm run build` and serve with `npm run start`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### License
+Private project. All rights reserved.
