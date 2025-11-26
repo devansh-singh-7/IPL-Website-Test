@@ -249,3 +249,52 @@ body {
   min-width: 60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* =====================================
+   Scrollbar Styling (Red theme)
+   - WebKit: Chrome, Edge, Safari
+   - Firefox: scrollbar-color
+   ===================================== */
+/* Global scrollbar */
+html {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--primary-700) var(--primary-50); /* thumb track */
+}
+
+/* WebKit scrollbars */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-50);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-700);
+  border-radius: 9999px;
+  border: 3px solid var(--primary-50);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-800);
+}
+
+/* Utility: apply to specific scroll containers if needed */
+.scrollbar-red {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-700) var(--primary-50);
+}
+.scrollbar-red::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.scrollbar-red::-webkit-scrollbar-track {
+  background: var(--primary-50);
+}
+.scrollbar-red::-webkit-scrollbar-thumb {
+  background-color: var(--primary-700);
+  border-radius: 9999px;
+  border: 3px solid var(--primary-50);
+}
+.scrollbar-red::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-800);
+}
