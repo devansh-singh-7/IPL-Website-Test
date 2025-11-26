@@ -33,5 +33,10 @@ pnpm-debug.log*
 # Coverage
 coverage/
 
+# Reports / local artifacts
+eslint_report.json
+lint_output.txt
+.eslintcache
+
 # OS
 Thumbs.db
