@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useMemo, useState, Suspense } from 'react'
-import { useTranslation } from '@/contexts/TranslationContext'
 import { Calendar, MapPin, Clock, TrendingUp, Sparkles, ChevronRight } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 
@@ -15,7 +14,6 @@ interface NewsItem {
 }
 
 function NewsEventsContent() {
-    const { t } = useTranslation()
     const [currentPage, setCurrentPage] = useState(1)
     const [viewMode, setViewMode] = useState<'grid' | 'timeline'>('grid')
     const searchParams = useSearchParams()
@@ -58,14 +56,17 @@ function NewsEventsContent() {
         )
     }, [q, newsItems])
 
-    useEffect(() => setCurrentPage(1), [q])
+    useEffect(() => {
+        const id = setTimeout(() => setCurrentPage(1), 0)
+        return () => clearTimeout(id)
+    }, [q])
 
     const itemsPerPage = viewMode === 'grid' ? 9 : 10
     const totalPages = Math.ceil(filteredNews.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage
     const currentItems = filteredNews.slice(startIndex, startIndex + itemsPerPage)
 
-    const safeT = (key: string, fallback: string) => String(t(key, fallback))
+    
 
     // Get featured (latest 3)
     const featuredEvents = filteredNews.slice(0, 3)
@@ -92,7 +93,7 @@ function NewsEventsContent() {
                             News & Events
                         </h1>
                         <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                            Discover the latest happenings, milestones, and celebrations from the Indian Penpals' League community
+                            Discover the latest happenings, milestones, and celebrations from the Indian Penpals&apos; League community
                         </p>
                     </div>
                 </div>
@@ -112,7 +113,7 @@ function NewsEventsContent() {
                     <h2 className="text-2xl font-bold text-gray-900">Featured Events</h2>
                 </div>
                 <div className="grid md:grid-cols-3 gap-6">
-                    {featuredEvents.map((item, index) => (
+                    {featuredEvents.map((item) => (
                         <article
                             key={item.id}
                             className="group relative bg-white rounded-2xl shadow-xl border-2 border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
@@ -194,7 +195,7 @@ function NewsEventsContent() {
             <section className="container mx-auto px-4 pb-16">
                 {viewMode === 'grid' ? (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {currentItems.map((item, index) => (
+                        {currentItems.map((item) => (
                             <article
                                 key={item.id}
                                 className="bg-gray-50 rounded-xl p-6 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-200"
@@ -236,7 +237,7 @@ function NewsEventsContent() {
                             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-red-200 via-red-300 to-red-200"></div>
 
                             <div className="space-y-8">
-                                {currentItems.map((item, index) => (
+                                {currentItems.map((item) => (
                                     <div key={item.id} className="relative flex gap-6">
                                         {/* Timeline dot */}
                                         <div className="relative shrink-0">

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
 
 interface CountUpProps {
@@ -18,7 +18,6 @@ export default function CountUp({
     prefix = '',
     suffix = ''
 }: CountUpProps) {
-    const [count, setCount] = useState(0)
     const [displayValue, setDisplayValue] = useState('')
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -46,15 +45,21 @@ export default function CountUp({
         }
     }
 
+    const parsed = useMemo(() => parseValue(end), [end])
+
+    const [initialDisplay] = useState<string>(() => {
+        if (parsed.number === 0 && parsed.rest === parsed.fullString && !/\d/.test(parsed.fullString)) {
+            return parsed.fullString
+        }
+        return ''
+    })
+
     useEffect(() => {
         if (isInView) {
-            const { number, rest, fullString } = parseValue(end)
+            const { number, rest, fullString } = parsed
 
             // If no number found (e.g. just text), just show it
-            if (number === 0 && rest === fullString && !/\d/.test(fullString)) {
-                setDisplayValue(fullString)
-                return
-            }
+            if (number === 0 && rest === fullString && !/\d/.test(fullString)) return
 
             let startTime: number | null = null
             let animationFrame: number
@@ -69,12 +74,10 @@ export default function CountUp({
                     const ease = 1 - Math.pow(1 - percentage, 4)
 
                     const currentCount = Math.floor(number * ease)
-                    setCount(currentCount)
                     setDisplayValue(`${currentCount}${rest}`)
 
                     animationFrame = requestAnimationFrame(animate)
                 } else {
-                    setCount(number)
                     setDisplayValue(`${number}${rest}`)
                 }
             }
@@ -83,11 +86,11 @@ export default function CountUp({
 
             return () => cancelAnimationFrame(animationFrame)
         }
-    }, [isInView, end, duration])
+    }, [isInView, parsed, duration])
 
     return (
         <span ref={ref} className={className}>
-            {prefix}{displayValue || (isInView ? parseValue(end).fullString : '0')}{suffix}
+            {prefix}{displayValue || (isInView ? initialDisplay || parsed.fullString : '0')}{suffix}
         </span>
     )
 }

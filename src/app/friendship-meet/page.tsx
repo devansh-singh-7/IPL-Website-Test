@@ -1,11 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useTranslation } from '@/contexts/TranslationContext'
 import { Users, Heart, Calendar, MapPin, Camera, Handshake, ArrowRight, Sparkles, Star, Globe } from 'lucide-react'
 
 export default function FriendshipMeet() {
-    const { t } = useTranslation()
     const [selectedYear, setSelectedYear] = useState('2024')
 
     const friendshipMeets = [

@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { useTranslation } from '@/contexts/TranslationContext'
 import { Users, Shield, Star, Linkedin, Mail } from 'lucide-react'
 
@@ -30,11 +31,13 @@ const Card: React.FC<{ person: Person }> = ({ person }) => (
         <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-red-600 to-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
 
         <div className="w-32 h-32 mx-auto mb-6 rounded-full p-1 bg-linear-to-br from-red-100 to-red-50 group-hover:from-red-600 group-hover:to-red-800 transition-colors duration-300">
-            <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                <img
+            <div className="w-full h-full rounded-full overflow-hidden bg-white relative">
+                <Image
                     src={person.img}
                     alt={`${person.name} photo`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="128px"
                 />
             </div>
         </div>

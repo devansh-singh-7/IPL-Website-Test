@@ -25,8 +25,8 @@ export const TranslationProvider: React.FC<ProviderProps> = ({ children }) => {
   useEffect(() => {
     try {
       const stored = localStorage.getItem('ipl_lang')
-      if (stored && stored !== lang) {
-        setLang(stored as Language)
+      if (stored) {
+        setTimeout(() => setLang(stored as Language), 0)
       }
     } catch { }
   }, [])

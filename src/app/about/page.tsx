@@ -50,7 +50,7 @@ export default function About() {
                             </h2>
                             <div className="bg-red-50 border-l-4 border-red-700 p-4 sm:p-6 mb-4 sm:mb-6 rounded-r-lg">
                                 <p className="text-base sm:text-lg italic text-gray-700">
-                                    "{t('home.founder_quote')}"
+                                    &quot;{t('home.founder_quote')}&quot;
                                 </p>
                                 <p className="text-right font-semibold text-red-800 mt-3 sm:mt-4 text-sm sm:text-base">
                                     - {t('home.founder_name')}
@@ -74,7 +74,7 @@ export default function About() {
                         {/* Registration Details */}
                         <div className="bg-gray-50 rounded-lg p-5 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-md">
                             <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
-                                {t('about.registration_title', 'Registration & Recognition')}
+                                {t('about.registration_title', 'Registration &amp; Recognition')}
                             </h3>
                             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                                 <div className="flex items-start gap-2 sm:gap-3">
@@ -210,7 +210,7 @@ export default function About() {
                     <div className="max-w-3xl mx-auto text-center">
                         <Heart className="w-12 h-12 mx-auto mb-6 text-red-700" />
                         <blockquote className="text-2xl font-light italic mb-4">
-                            "{t('home.mother_teresa_quote')}"
+                            &quot;{t('home.mother_teresa_quote')}&quot;
                         </blockquote>
                         <cite className="text-lg not-italic font-semibold">- {t('home.mother_teresa')}</cite>
                     </div>

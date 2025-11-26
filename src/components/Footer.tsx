@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useTranslation } from '../contexts/TranslationContext'
-import { Mail, Phone, MapPin, Heart, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from 'lucide-react'
 
 type Props = Record<string, never>
 
@@ -22,11 +22,11 @@ const Footer: React.FC<Props> = () => {
                 IPL
               </div>
               <span className="font-bold text-xl tracking-tight text-white">
-                Indian Penpals' League
+                Indian Penpals&apos; League
               </span>
             </Link>
             <p className="text-neutral-400 leading-relaxed">
-              {t('footer.about_text', 'Love, Friendship & Humanity — A confederation of friends united to serve communities.')}
+              {t('footer.about_text', 'Love, Friendship &amp; Humanity — A confederation of friends united to serve communities.')}
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
@@ -117,7 +117,7 @@ const Footer: React.FC<Props> = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-neutral-500 text-sm text-center md:text-left">
-            © {currentYear} Indian Penpals' League. All rights reserved.
+            © {currentYear} Indian Penpals&apos; League. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-neutral-500">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

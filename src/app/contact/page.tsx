@@ -7,6 +7,12 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 
 type Errors = Record<string, string>
 
+const IconBox: React.FC<React.PropsWithChildren> = ({ children }) => (
+    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-red-50 text-red-700 shrink-0">
+        {children}
+    </div>
+)
+
 export default function Contact() {
     const { t } = useTranslation()
 
@@ -18,6 +24,12 @@ export default function Contact() {
     const [status, setStatus] = useState({ loading: false, success: false })
     const [honeypot, setHoneypot] = useState('')
     const [cooldownUntil, setCooldownUntil] = useState(0)
+    const [now, setNow] = useState<number>(0)
+
+    useEffect(() => {
+        const timer = setInterval(() => setNow(Date.now()), 1000)
+        return () => clearInterval(timer)
+    }, [])
 
     useEffect(() => {
         if (status.success) {
@@ -51,7 +63,7 @@ export default function Contact() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (cooldownUntil && Date.now() < cooldownUntil) return
+        if (cooldownUntil && now < cooldownUntil) return
         setStatus({ loading: false, success: false })
 
         if (honeypot) {
@@ -102,12 +114,6 @@ export default function Contact() {
             setErrors({ submit: t('contact.error_submit', 'Something went wrong. Please try again later.') })
         }
     }
-
-    const IconBox: React.FC<React.PropsWithChildren> = ({ children }) => (
-        <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-red-50 text-red-700 shrink-0">
-            {children}
-        </div>
-    )
 
     const addressLines = (t('footer.address', `103, Starview Apts., Opp. Corporate Park,\nV.N.Purav Marg, Chembur,\nMumbai - 400071, India`) || '').split('\n')
 
@@ -285,9 +291,9 @@ export default function Contact() {
                                     <div>
                                         <button
                                             type="submit"
-                                            disabled={status.loading || (cooldownUntil ? Date.now() < cooldownUntil : false)}
-                                            aria-disabled={status.loading || (cooldownUntil ? Date.now() < cooldownUntil : false)}
-                                            className={`w-full inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition transform ${(status.loading || (cooldownUntil ? Date.now() < cooldownUntil : false)) ? 'opacity-80 cursor-not-allowed' : 'hover:scale-105'} bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-200`}
+                                            disabled={status.loading || (cooldownUntil ? now < cooldownUntil : false)}
+                                            aria-disabled={status.loading || (cooldownUntil ? now < cooldownUntil : false)}
+                                            className={`w-full inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition transform ${(status.loading || (cooldownUntil ? now < cooldownUntil : false)) ? 'opacity-80 cursor-not-allowed' : 'hover:scale-105'} bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-200`}
                                         >
                                             {status.loading && (
                                                 <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -295,7 +301,7 @@ export default function Contact() {
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
                                                 </svg>
                                             )}
-                                            {(cooldownUntil ? Date.now() < cooldownUntil : false) && !status.loading
+                                            {(cooldownUntil ? now < cooldownUntil : false) && !status.loading
                                                 ? t('contact.cooldown', 'Please wait...')
                                                 : status.loading
                                                     ? t('contact.sending', 'Sending...')

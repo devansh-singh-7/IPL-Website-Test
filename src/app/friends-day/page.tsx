@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { useTranslation } from '@/contexts/TranslationContext'
-import { Search, Calendar, MapPin, Users, Filter, ArrowRight } from 'lucide-react'
+import { Search, Calendar, MapPin, Users, ArrowRight } from 'lucide-react'
 
 type EventItem = {
     year: number
@@ -161,10 +162,13 @@ export default function FriendsDay() {
                                                 {event.image && (
                                                     <div className="h-48 rounded-xl overflow-hidden mb-4 relative">
                                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10" />
-                                                        <img
+                                                        <Image
                                                             src={event.image}
                                                             alt={String(t(event.titleKey))}
-                                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                                            fill
+                                                            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                            priority={false}
                                                         />
                                                     </div>
                                                 )}
